@@ -1,6 +1,6 @@
 {
     "name": "wijzijnweb/laravel-inertia-permissions",
-    "description": ":package_description",
+    "description": "Easy to use package to implement Spatie's Permissions package into Inertia Laravel projects.",
     "keywords": [
         "permissions",
         "roles",
