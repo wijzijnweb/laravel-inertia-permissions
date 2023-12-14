@@ -11,11 +11,31 @@ You can install the package via composer:
 composer require wijzijnweb/laravel-inertia-permissions
 ```
 
-You can publish and run the migrations with:
+You can publish and run the migrations with
 
 ```bash
-php artisan vendor:publish --tag="laravel-inertia-permissions-migrations"
 php artisan migrate
+```
+
+Add the following to your vite.config.js file
+    
+```js
+resolve: {
+    alias: {
+        '@laravel-inertia-permissions': 'vendor/wijzijnweb/laravel-inertia-permissions/resources/js'
+    }
+}
+```
+
+Optionally, you can add the following to your jsconfig.json file:
+```json
+{
+    "compilerOptions": {
+        "paths": {
+            "@laravel-inertia-permissions/*": ["./vendor/wijzijnweb/laravel-inertia-permissions/resources/js/*"]
+        }
+    }
+}
 ```
 
 [//]: # (Optionally, you can publish the views using)
@@ -33,6 +53,8 @@ Permissions and Roles are automatically Shared with Inertia.
 You can access them in your Vue components like this:
 
 ```js
+import usePermissions from '@laravel-inertia-permissions/Uses/usePermissions.js';
+
 const { can, is } = usePermissions()
 
 if (can('edit articles')) {
@@ -45,6 +67,9 @@ if (is('writer')) {
 ```
 
 ```js
+import FormRoles from '@laravel-inertia-permissions/Components/FormRoles.vue';
+import FormPermissions from '@laravel-inertia-permissions/Components/FormPermissions.vue';
+
 <FormRoles v-model="form.roles" />
 <FormPermissions v-model="form.permissions" />
 ```
@@ -52,6 +77,8 @@ if (is('writer')) {
 There is also a component to prevent the user from seeing something with a feedback message:
 
 ```js
+import HasPermission from '@laravel-inertia-permissions/Components/HasPermission.vue';
+
 <HasPermission permission="edit articles" role="writer">
     <p>You can edit articles</p>
 </HasPermission>
