@@ -74,6 +74,26 @@ import FormPermissions from '@laravel-inertia-permissions/Components/FormPermiss
 <FormPermissions v-model="form.permissions" />
 ```
 
+You can also use the directives to hide specific elements. To that you need to register the directives in your app.js file:
+```js
+import {
+    hasRoleDirective,
+    hasPermissionDirective
+} from '@laravel-inertia-permissions/Directives/permissionDirective.js';
+
+createApp({render: () => h(App, props)})
+    .directive('hasRole', hasRoleDirective)
+    .directive('hasPermission', hasPermissionDirective)
+```
+
+After that you can use the directives in your Vue components:
+You can use the pipe symbol and the ampersand to check for multiple roles or permissions:
+
+```js
+ <MyComponent v-has-role="'admin|writer'" />
+ <MyComponent v-has-permission="'edit articles&delete articles'" />
+```
+
 There is also a component to prevent the user from seeing something with a feedback message:
 
 ```js
