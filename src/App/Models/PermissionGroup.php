@@ -14,6 +14,7 @@ class PermissionGroup extends Model
     public function permissions(): HasMany
     {
         $model = config('permission.models.permission');
+
         return $this->hasMany($model);
     }
 }
