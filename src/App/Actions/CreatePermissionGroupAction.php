@@ -3,6 +3,7 @@
 namespace Wijzijnweb\LaravelInertiaPermissions\App\Actions;
 
 use Wijzijnweb\LaravelInertiaPermissions\App\Models\PermissionGroup;
+
 use function request;
 
 class CreatePermissionGroupAction
