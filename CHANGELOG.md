@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `:package_name` will be documented in this file.
+All notable changes to `wijzijnweb/laravel-inertia-permissions` will be documented in this file.
 
 ## v1.0.1 - 2023-12-15
 

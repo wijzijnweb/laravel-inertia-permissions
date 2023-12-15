@@ -107,12 +107,7 @@ import HasPermission from '@laravel-inertia-permissions/Components/HasPermission
 
 ## Changelog
 
-v1.0.1
-- Added permissions groups
-- Refactored to TypeScript
-
-v1.0.0 - Initial release
-- Added Vue components to manage roles and permissions
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Credits
 
