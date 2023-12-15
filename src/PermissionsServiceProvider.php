@@ -21,7 +21,7 @@ class PermissionsServiceProvider extends ServiceProvider
                 if ($user) {
                     return [
                         'permissions' => $user->getAllPermissions()->pluck('name'),
-                        'roles' => $user->getRoleCodes(),
+                        'roles' => $user->roles->pluck('code'),
                     ];
                 }
 
