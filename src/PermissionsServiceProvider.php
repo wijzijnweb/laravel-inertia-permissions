@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Wijzijnweb\LaravelInertiaPermissions\App\Models\PermissionGroup;
 
 class PermissionsServiceProvider extends ServiceProvider
 {
@@ -28,6 +29,7 @@ class PermissionsServiceProvider extends ServiceProvider
             },
             'permissions' => function () {
                 return [
+                    'groups' => PermissionGroup::with('permissions')->get(),
                     'permissions' => Permission::get(),
                     'roles' => Role::get(),
                 ];

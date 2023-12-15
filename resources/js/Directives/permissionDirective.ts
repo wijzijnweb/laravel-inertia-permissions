@@ -1,4 +1,4 @@
-import usePermissions from "../Uses/usePermissions.js";
+import usePermissions from "../Uses/usePermissions.ts";
 
 export function hasPermissionDirective(el, binding) {
     const { can } = usePermissions()

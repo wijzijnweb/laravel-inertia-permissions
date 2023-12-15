@@ -2,7 +2,8 @@ import {usePage} from "@inertiajs/vue3";
 
 export default function usePermissions() {
     const permissions = usePage().props.user_permissions;
-    const can = function (value) {
+
+    const can = function <Boolean>(value) {
         let _return = false;
         if (!Array.isArray(permissions.permissions)) {
             return false;
@@ -26,7 +27,7 @@ export default function usePermissions() {
         return _return;
     }
 
-    const is = function (value) {
+    const is = function <Boolean>(value) {
         let _return = false;
 
         if (!Array.isArray(permissions.roles)) {

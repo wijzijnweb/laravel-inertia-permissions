@@ -25,7 +25,7 @@
 </template>
 
 <script setup>
-import usePermissions from "../uses/usePermissions.js";
+import usePermissions from "../Uses/usePermissions.ts";
 
 const props = defineProps({
     permission: String|Array,

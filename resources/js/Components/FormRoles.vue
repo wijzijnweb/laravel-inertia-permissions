@@ -13,7 +13,7 @@
     </ul>
 </template>
 
-<script setup>
+<script setup lang="ts">
     import {computed} from "vue";
     import {usePage} from "@inertiajs/vue3";
 
@@ -26,7 +26,7 @@
     })
 
     const proxyValue = computed({
-        get() {
+        get<Array>() {
             return props.modelValue
         },
         set(value) {
@@ -34,7 +34,7 @@
         }
     })
 
-    const roles = computed(() => {
+    const roles = computed(<Array>() => {
         return usePage().props.permissions.roles
     })
 </script>
