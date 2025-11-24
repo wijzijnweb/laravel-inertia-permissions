@@ -12,7 +12,7 @@ class PermissionsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->publishesMigrations([__DIR__.'/../database/migrations']);
+        $this->publishesMigrations([__DIR__.'/../database/migrations' => database_path('migrations')], 'laravel-inertia-permissions-migrations');
 
         Inertia::share([
             'user_permissions' => function () {
