@@ -4,6 +4,7 @@ namespace Wijzijnweb\LaravelInertiaPermissions\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
 class PermissionGroup extends Model
 {
@@ -13,7 +14,7 @@ class PermissionGroup extends Model
 
     public function permissions(): HasMany
     {
-        $model = config('permission.models.permission');
+        $model = config('permission.models.permission', SpatiePermission::class);
 
         return $this->hasMany($model);
     }

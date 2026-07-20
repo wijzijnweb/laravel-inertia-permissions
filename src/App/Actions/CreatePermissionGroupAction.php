@@ -14,7 +14,9 @@ class CreatePermissionGroupAction
             'name' => 'required',
         ]);
 
-        return PermissionGroup::query()->updateOrCreate(['id' => request('id')], [
+        $model = config('permission.models.permission_group', PermissionGroup::class);
+
+        return $model::query()->updateOrCreate(['id' => request('id')], [
             'name' => $validated['name'],
         ]);
     }

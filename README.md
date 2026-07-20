@@ -47,6 +47,21 @@ Optionally, you can add the following to your jsconfig.json file:
 
 [//]: # (```)
 
+## Configuration
+
+By default, permission groups use the `PermissionGroup` model bundled with this package. If you need a custom
+implementation, add a `permission_group` key to the `models` array in your app's `config/permission.php`:
+
+```php
+'models' => [
+    'permission' => Spatie\Permission\Models\Permission::class,
+    'role' => Spatie\Permission\Models\Role::class,
+    'permission_group' => App\Models\PermissionGroup::class,
+],
+```
+
+Your custom model should extend `Wijzijnweb\LaravelInertiaPermissions\App\Models\PermissionGroup`.
+
 ## Usage
 
 Permissions and Roles are automatically Shared with Inertia. 

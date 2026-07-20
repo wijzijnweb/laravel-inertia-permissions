@@ -4,8 +4,8 @@ namespace Wijzijnweb\LaravelInertiaPermissions;
 
 use Illuminate\Support\ServiceProvider;
 use Inertia\Inertia;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission as SpatiePermission;
+use Spatie\Permission\Models\Role as SpatieRole;
 use Wijzijnweb\LaravelInertiaPermissions\App\Models\PermissionGroup;
 
 class PermissionsServiceProvider extends ServiceProvider
@@ -28,10 +28,18 @@ class PermissionsServiceProvider extends ServiceProvider
                 return [];
             },
             'permissions' => function () {
+                if (! auth()->check()) {
+                    return [];
+                }
+
+                $permissionGroupModel = config('permission.models.permission_group', PermissionGroup::class);
+                $permissionModel = config('permission.models.permission', SpatiePermission::class);
+                $roleModel = config('permission.models.role', SpatieRole::class);
+
                 return [
-                    'groups' => PermissionGroup::with('permissions')->get(),
-                    'permissions' => Permission::get(),
-                    'roles' => Role::get(),
+                    'groups' => $permissionGroupModel::with('permissions')->get(),
+                    'permissions' => $permissionModel::get(),
+                    'roles' => $roleModel::get(),
                 ];
             },
         ]);

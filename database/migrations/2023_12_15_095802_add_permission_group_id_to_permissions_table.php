@@ -18,4 +18,14 @@ return new class extends Migration
                 ->nullOnDelete();
         });
     }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->dropConstrainedForeignId('permission_group_id');
+        });
+    }
 };
