@@ -12,6 +12,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "inertiajs/inertia-laravel": "^2.0|^3.0",
         "spatie/laravel-permission": "^5.0|^6.0"
     },
     "autoload": {

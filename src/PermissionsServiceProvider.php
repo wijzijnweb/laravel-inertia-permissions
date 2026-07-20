@@ -27,7 +27,7 @@ class PermissionsServiceProvider extends ServiceProvider
 
                 return [];
             },
-            'permissions' => function () {
+            'permissions' => Inertia::optional(function () {
                 if (! auth()->check()) {
                     return [];
                 }
@@ -41,7 +41,7 @@ class PermissionsServiceProvider extends ServiceProvider
                     'permissions' => $permissionModel::get(),
                     'roles' => $roleModel::get(),
                 ];
-            },
+            }),
         ]);
     }
 }

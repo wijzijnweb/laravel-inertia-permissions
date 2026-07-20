@@ -16,6 +16,9 @@
 <script setup lang="ts">
     import {computed} from "vue";
     import {usePage} from "@inertiajs/vue3";
+    import useEnsurePermissionsLoaded from "../Uses/useEnsurePermissionsLoaded";
+
+    useEnsurePermissionsLoaded()
 
     const emit = defineEmits(['update:modelValue'])
     const props = defineProps({
@@ -35,6 +38,6 @@
     })
 
     const roles = computed(<Array>() => {
-        return usePage().props.permissions.roles
+        return usePage().props.permissions?.roles ?? []
     })
 </script>

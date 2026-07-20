@@ -39,6 +39,9 @@
 <script setup lang="ts">
     import {computed} from "vue";
     import {usePage} from "@inertiajs/vue3";
+    import useEnsurePermissionsLoaded from "../Uses/useEnsurePermissionsLoaded";
+
+    useEnsurePermissionsLoaded()
 
     const emit = defineEmits(['update:modelValue'])
     const props = defineProps({
@@ -58,10 +61,10 @@
     })
 
     const permissions = computed(<Array>() =>  {
-        return usePage().props.permissions.permissions.filter(p => !p.permission_group_id)
+        return usePage().props.permissions?.permissions?.filter(p => !p.permission_group_id) ?? []
     })
 
     const groups = computed(<Array>() => {
-        return usePage().props.permissions.groups
+        return usePage().props.permissions?.groups ?? []
     })
 </script>
