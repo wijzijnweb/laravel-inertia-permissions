@@ -13,7 +13,7 @@ return new class extends Migration
     {
         if (! Schema::hasColumn('permissions', 'label')) {
             Schema::table('permissions', function (Blueprint $table) {
-                $table->string('label')->after('name');
+                $table->string('label')->nullable()->after('name');
             });
         }
     }

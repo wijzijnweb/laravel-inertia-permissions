@@ -1,61 +1,46 @@
-import {usePage} from "@inertiajs/vue3";
+import { usePage } from '@inertiajs/vue3';
 
-export default function usePermissions() {
-    const permissions = usePage().props.user_permissions;
+export interface UserPermissions {
+    permissions?: string[];
+    roles?: string[];
+}
 
-    const can = function <Boolean>(value) {
-        let _return = false;
-        if (!Array.isArray(permissions.permissions)) {
-            return false;
-        }
-        if (value.includes('|')) {
-            value.split('|').forEach(function (item) {
-                if (permissions.permissions.includes(item.trim())) {
-                    _return = true;
-                }
-            });
-        } else if (value.includes('&')) {
-            _return = true;
-            value.split('&').forEach(function (item) {
-                if (!permissions.permissions.includes(item.trim())) {
-                    _return = false;
-                }
-            });
-        } else {
-            _return = permissions.permissions.includes(value.trim());
-        }
-        return _return;
+export interface UsePermissions {
+    roles: string[];
+    permissions: string[];
+    can: (value: string) => boolean;
+    is: (value: string) => boolean;
+}
+
+/**
+ * Match a `a|b` (any of) or `a&b` (all of) expression against a list.
+ * A plain value without a separator is a single exact match.
+ */
+function matches(haystack: unknown, value: string): boolean {
+    if (!Array.isArray(haystack)) {
+        return false;
     }
 
-    const is = function <Boolean>(value) {
-        let _return = false;
+    const list = haystack as string[];
 
-        if (!Array.isArray(permissions.roles)) {
-            return false;
-        }
-        if (value.includes('|')) {
-            value.split('|').forEach(function (item) {
-                if (permissions.roles.includes(item.trim())) {
-                    _return = true;
-                }
-            });
-        } else if (value.includes('&')) {
-            _return = true;
-            value.split('&').forEach(function (item) {
-                if (!permissions.roles.includes(item.trim())) {
-                    _return = false;
-                }
-            });
-        } else {
-            _return = permissions.roles.includes(value.trim());
-        }
-        return _return;
+    if (value.includes('|')) {
+        return value.split('|').some((item) => list.includes(item.trim()));
     }
+
+    if (value.includes('&')) {
+        return value.split('&').every((item) => list.includes(item.trim()));
+    }
+
+    return list.includes(value.trim());
+}
+
+export default function usePermissions(): UsePermissions {
+    const shared = (usePage().props.user_permissions ?? {}) as UserPermissions;
 
     return {
-        roles: permissions.roles,
-        permissions: permissions.permissions,
-        can,
-        is
-    }
+        roles: shared.roles ?? [],
+        permissions: shared.permissions ?? [],
+        can: (value: string) => matches(shared.permissions, value),
+        is: (value: string) => matches(shared.roles, value),
+    };
 }

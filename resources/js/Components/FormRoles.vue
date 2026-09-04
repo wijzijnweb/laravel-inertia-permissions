@@ -17,6 +17,7 @@
     import {computed} from "vue";
     import {usePage} from "@inertiajs/vue3";
     import useEnsurePermissionsLoaded from "../Uses/useEnsurePermissionsLoaded";
+    import type {PermissionCatalogue} from "../types";
 
     useEnsurePermissionsLoaded()
 
@@ -29,7 +30,7 @@
     })
 
     const proxyValue = computed({
-        get<Array>() {
+        get() {
             return props.modelValue
         },
         set(value) {
@@ -37,7 +38,5 @@
         }
     })
 
-    const roles = computed(<Array>() => {
-        return usePage().props.permissions?.roles ?? []
-    })
+    const roles = computed(() => ((usePage().props.permissions ?? {}) as PermissionCatalogue).roles ?? [])
 </script>

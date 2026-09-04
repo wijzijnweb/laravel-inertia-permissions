@@ -13,7 +13,7 @@
     "require": {
         "php": "^8.1",
         "inertiajs/inertia-laravel": "^2.0|^3.0",
-        "spatie/laravel-permission": "^5.0|^6.0"
+        "spatie/laravel-permission": "^5.0|^6.0|^7.0|^8.0"
     },
     "autoload": {
         "psr-4": {
@@ -38,5 +38,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "vite": {
+        "alias": {
+            "@inertia-permissions": "./resources/js/index.ts",
+            "@inertia-permissions/*": "./resources/js/*"
+        }
+    }
 }

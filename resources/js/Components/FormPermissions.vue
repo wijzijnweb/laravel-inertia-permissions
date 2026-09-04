@@ -40,6 +40,7 @@
     import {computed} from "vue";
     import {usePage} from "@inertiajs/vue3";
     import useEnsurePermissionsLoaded from "../Uses/useEnsurePermissionsLoaded";
+    import type {PermissionCatalogue} from "../types";
 
     useEnsurePermissionsLoaded()
 
@@ -52,7 +53,7 @@
     })
 
     const proxyValue = computed({
-        get<Array>() {
+        get() {
             return props.modelValue
         },
         set(value) {
@@ -60,11 +61,9 @@
         }
     })
 
-    const permissions = computed(<Array>() =>  {
-        return usePage().props.permissions?.permissions?.filter(p => !p.permission_group_id) ?? []
-    })
+    const catalogue = computed(() => (usePage().props.permissions ?? {}) as PermissionCatalogue)
 
-    const groups = computed(<Array>() => {
-        return usePage().props.permissions?.groups ?? []
-    })
+    const permissions = computed(() => catalogue.value.permissions?.filter(p => !p.permission_group_id) ?? [])
+
+    const groups = computed(() => catalogue.value.groups ?? [])
 </script>
